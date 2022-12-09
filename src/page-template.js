@@ -61,16 +61,16 @@ const generateTeam = team => {
     const html = [];
 
     html.push(team
-        .filter(employee => employee.getRole() === "Manager")
+        .filter(newEmployee => newEmployee.getRole() === "Manager")
         .map(manager => generateManager(manager))
     );
     html.push(team
-        .filter(employee => employee.getRole() === "Engineer")
+        .filter(newEmployee => newEmployee.getRole() === "Engineer")
         .map(engineer => generateEngineer(engineer))
         .join("")
     );
     html.push(team
-        .filter(employee => employee.getRole() === "Intern")
+        .filter(newEmployee => newEmployee.getRole() === "Intern")
         .map(intern => generateIntern(intern))
         .join("")
     );

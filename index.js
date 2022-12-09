@@ -19,7 +19,7 @@ const distPath = path.join(DIST_DIR, 'team.html');
 // render page-template after creating fle in DIST_DIR.
 const render = require('./src/page-template.js');
 
-// create array for teamMembers and their id
+// create array for teamMembers and their id. Easier to create a separate array for idArray instead of pulling from teamMembers array.
 
 const teamMembers = [];
 const idArray = [];
@@ -55,8 +55,8 @@ function appMenu() {
           message: "What is the Manager's ID?",
           // add validation for input
           validate: (answer) => {
-            const pass = answer.match(/^[1-9]\d*$/);
-            if (pass) {
+            const correct = answer.match(/^[1-9]\d*$/);
+            if (correct) {
               return true;
             }
             return 'You entered an input of 0, please enter a positive number greater than zero!';
@@ -67,8 +67,8 @@ function appMenu() {
           name: 'managerEmail',
           message: "What is the manager's email?",
           validate: (answer) => {
-            const pass = answer.match(/\S+@\S+\.\S+/);
-            if (pass) {
+            const correct = answer.match(/\S+@\S+\.\S+/);
+            if (correct) {
               return true;
             }
             return 'You did not enter in a valid email, please try again.';
@@ -79,8 +79,8 @@ function appMenu() {
           name: 'managerOfficeNumber',
           message: "What is the manager's office number?",
           validate: (answer) => {
-            const pass = answer.match(/^[1-9]\d*$/);
-            if (pass) {
+            const correct = answer.match(/^[1-9]\d*$/);
+            if (correct) {
               return true;
             }
             return 'Please enter a number greater than zero';
@@ -154,8 +154,8 @@ function addEngineer() {
       name: 'engineerId',
       message: "What is the engineer's id?",
       validate: (answer) => {
-        const pass = answer.match(/^[1-9]\d*$/);
-        if (pass) {
+        const correct = answer.match(/^[1-9]\d*$/);
+        if (correct) {
           // check to see if Id is already in the array
           if (idArray.includes(answer)) {
             return 'This ID is already taken, try again.';
@@ -171,8 +171,8 @@ function addEngineer() {
       name: 'engineerEmail',
       message: "What is the engineer's email?",
       validate: (answer) => {
-        const pass = answer.match(/\S+@\S+\.\S+/);
-        if (pass) {
+        const correct = answer.match(/\S+@\S+\.\S+/);
+        if (correct) {
           return true;
         }
         return 'Please enter a valid email address';
@@ -226,8 +226,8 @@ function addIntern() {
       name: 'internId',
       message: "what is the intern's id",
       validate: (answer) => {
-        const pass = answer.match(/^[1-9]\d*$/);
-        if (pass) {
+        const correct = answer.match(/^[1-9]\d*$/);
+        if (correct) {
           if (idArray.includes(answer))
           {
             return "This ID is taken, try a different number.";
@@ -243,8 +243,8 @@ function addIntern() {
       name: 'internEmail',
       message: "What is the intern's email address?",
       validate: (answer) => {
-        const pass = answer.match(/\S+@\S+\.\S+/);
-        if(pass) {
+        const correct = answer.match(/\S+@\S+\.\S+/);
+        if(correct) {
           return true;
         }
         return "Please enter a valid email address.";
