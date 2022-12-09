@@ -1,0 +1,32 @@
+/* Classes we have are: employee-card, card-body, list-group-item, team-heading, team-area */
+
+
+.card-employee {
+background-color: pink;
+max-width: auto;
+display: flex;
+flex-direction: column;
+margin: .5em;
+justify-content: center;
+}
+
+.card-employee-body {
+background-color: salmon;
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+
+.list-group-employee {
+background-color: rosybrown;
+}
+
+.team-heading {
+background-color: bisque;
+color: black;
+}
+
+.team-area {
+  background-color: blanchedalmond;
+  max-width: auto;
+}

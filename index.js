@@ -29,7 +29,7 @@ const idArray = [];
 console.log('\nWelcome to the team generator!\nUse `npm run reset` to reset the dist/ folder\n'
 );
 
-// create function for menu and function inside of menu to createManager
+// create function for menu and function inside of menu to createManager. Maybe should use switch to clean up the code. Create a separate page with all the questions instead and use switch with it for user input?
 
 function appMenu() {
   function createManager() {

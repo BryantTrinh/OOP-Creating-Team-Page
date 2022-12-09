@@ -1,62 +1,68 @@
-// create the team
+// Creting team using const generateTeam and function to dynamically create.
 const generateTeam = team => {
 
-    // create the manager html
+    // create the manager html using template literals, // a tag so email is clickable//
+  
+
     const generateManager = manager => {
         return `
-        <div class="card employee-card">
+        <div class="card card-employee">
         <div class="card-header">
             <h2 class="card-title">${manager.getName()}</h2>
-            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${manager.getRole()}</h3>
+            <h3 class="card-title">${manager.getRole()}</h3>
         </div>
-        <div class="card-body">
+        <div class="card employee-body">
             <ul class="list-group">
-                <li class="list-group-item">ID: ${manager.getId()}</li>
-                <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
-                <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
+                <li class="list-group-employee">ID: ${manager.getId()}</li>
+                <li class="list-group-employee">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
+                <li class="list-group-employee">Office number: ${manager.getOfficeNumber()}</li>
             </ul>
         </div>
     </div>
         `;
     };
+    // engineer section html
 
-    // create the html for engineers
     const generateEngineer = engineer => {
         return `
-        <div class="card employee-card">
+        <div class="card card-employee">
     <div class="card-header">
         <h2 class="card-title">${engineer.getName()}</h2>
-        <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>${engineer.getRole()}</h3>
+        <h3 class="card-title">${engineer.getRole()}</h3>
     </div>
-    <div class="card-body">
+    <div class="card employee-body">
         <ul class="list-group">
-            <li class="list-group-item">ID: ${engineer.getId()}</li>
-            <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-            <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank" rel="noopener noreferrer">${engineer.getGithub()}</a></li>
+            <li class="list-group-employee">ID: ${engineer.getId()}</li>
+            <li class="list-group-employee">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+            <li class="list-group-employee">GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank" rel="noopener noreferrer">${engineer.getGithub()}</a></li>
         </ul>
     </div>
 </div>
         `;
     };
 
-    // create the html for interns
+
+    // create for interns
     const generateIntern = intern => {
         return `
-        <div class="card employee-card">
+        <div class="card card-employee">
     <div class="card-header">
         <h2 class="card-title">${intern.getName()}</h2>
-        <h3 class="card-title"><i class="fas fa-user-graduate mr-2"></i>${intern.getRole()}</h3>
+        <h3 class="card-title">${intern.getRole()}</h3>
     </div>
-    <div class="card-body">
+    <div class="card employee-body">
         <ul class="list-group">
-            <li class="list-group-item">ID: ${intern.getId()}</li>
-            <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
-            <li class="list-group-item">School: ${intern.getSchool()}</li>
+            <li class="list-group-employee">ID: ${intern.getId()}</li>
+            <li class="list-group-employee">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
+            <li class="list-group-employee">School: ${intern.getSchool()}</li>
         </ul>
     </div>
 </div>
         `;
     };
+    
+    // make const html to hold array for Manager, Engineer, and Intern. Using const X.push to team, and filter team by Manager, Engineer, Intern. Return and join at the end.
+
 
     const html = [];
 
@@ -79,10 +85,10 @@ const generateTeam = team => {
 
 }
 
-// export function to generate entire page
+// module.export to generate page. Rememeber to use team function
 module.exports = team => {
 
-    return `
+       return `
     <!DOCTYPE html>
 <html lang="en">
 

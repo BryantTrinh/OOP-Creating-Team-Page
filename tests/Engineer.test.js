@@ -20,3 +20,4 @@ test("getRole() will return Engineer", () => {
   const newInfo = new Engineer("Foo", 1, "sample@sample.com", "GitHubUser");
   expect(newInfo.getRole()).toBe(testData);
 });
+
