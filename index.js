@@ -2,7 +2,7 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
-const inquirer = require('./lib/inquirer');
+const inquirer = require('inquirer');
 
 const path = require('path');
 
@@ -55,8 +55,8 @@ function appMenu() {
           message: "What is the Manager's ID?",
           // add validation for input
           validate: (answer) => {
-            const true = answer.match(/^[1-9]\d*$/);
-            if (true) {
+            const pass = answer.match(/^[1-9]\d*$/);
+            if (pass) {
               return true;
             }
             return 'You entered an input of 0, please enter a positive number greater than zero!';
@@ -67,19 +67,19 @@ function appMenu() {
           name: 'managerEmail',
           message: "What is the manager's email?",
           validate: (answer) => {
-            const true = answer.match(/\S+@\S+\.\S+/);
-            if (true) {
+            const pass = answer.match(/\S+@\S+\.\S+/);
+            if (pass) {
               return true;
             }
             return 'You did not enter in a valid email, please try again.';
         },
         },
         {
-          type: 'input'
+          type: 'input',
           name: 'managerOfficeNumber',
           message: "What is the manager's office number?",
           validate: (answer) => {
-            const true = answer.match(/^[1-9]\d*$/);
+            const pass = answer.match(/^[1-9]\d*$/);
             if (pass) {
               return true;
             }
@@ -103,5 +103,193 @@ function appMenu() {
 
 // Next create function to createTeam using inquirer prompt
 
+function createTeam() {
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'memberChoice',
+        message: 'What type of team member would you like to add?',
+        choices: [
+          'Engineer',
+          'Intern',
+          "Do not add additional members",
+        ],
+      },
+    ])
+    // then statement for userChoice, using switch and break
+    .then((userChoice) => {
+      switch (userChoice.memberChoice) {
+        case 'Engineer':
+          addEngineer();
+          break;
+        case 'Intern':
+          addIntern();
+          break;
+          // use default for not adding additional members.
+        default:
+          buildTeam();
+      }
+    });
+}
 
+// next create addEngineer function using inquirer prompt
 
+function addEngineer() {
+  inquirer
+  .prompt([
+    {
+      type: 'input',
+          name: 'engineerName',
+          message: "What is the engineer's name?",
+          validate: (answer) => {
+            if (answer !== '') {
+              return true;
+            }
+            return 'You did not type a character, please try again.';
+          },
+    },
+    {
+      type: 'input',
+      name: 'engineerId',
+      message: "What is the engineer's id?",
+      validate: (answer) => {
+        const pass = answer.match(/^[1-9]\d*$/);
+        if (pass) {
+          // check to see if Id is already in the array
+          if (idArray.includes(answer)) {
+            return 'This ID is already taken, try again.';
+          } else {
+            return true;
+          }
+        }
+        return 'Please enter a number greater than zero'; 
+    },
+    },
+    {
+      type: 'input',
+      name: 'engineerEmail',
+      message: "What is the engineer's email?",
+      validate: (answer) => {
+        const pass = answer.match(/\S+@\S+\.\S+/);
+        if (pass) {
+          return true;
+        }
+        return 'Please enter a valid email address';
+      },
+    },
+    {
+      type: 'input',
+      name: 'engineerGithub',
+      message: "What is the engineer's Github username?",
+      validate: (answer) => {
+        if (answer !== '') {
+          return true;
+        }
+        return 'Please enter at least one character.';
+      },
+    },
+  ])
+  // then statement to combine engineer's information to teamMembers array and idArray.
+  .then((answers) => {
+    const engineer = new Engineer(
+      answers.engineerName,
+      answers.engineerId,
+      answers.engineerEmail,
+      answers.engineerGithub
+    );
+    teamMembers.push(engineer);
+    idArray.push(answers.engineerID);
+    createTeam();
+  });
+}
+
+// same thing as the two before, function to add intern, use inquirer
+
+function addIntern() {
+  inquirer
+  .prompt([
+    {
+      type: 'input',
+      name: 'internName',
+      message: "What is the intern's name?",
+      validate: (answer) => 
+      {
+        if (answer !== '') {
+          return true;
+        }
+        return 'Enter in at least one character.';
+      },
+    },
+    {
+      type: 'input',
+      name: 'internId',
+      message: "what is the intern's id",
+      validate: (answer) => {
+        const pass = answer.match(/^[1-9]\d*$/);
+        if (pass) {
+          if (idArray.includes(answer))
+          {
+            return "This ID is taken, try a different number.";
+          } else {
+            return true;
+          }
+        }
+        return 'Please enter a number greater than zero.';
+      },
+    },
+    {
+      type: 'input',
+      name: 'internEmail',
+      message: "What is the intern's email address?",
+      validate: (answer) => {
+        const pass = answer.match(/\S+@\S+\.\S+/);
+        if(pass) {
+          return true;
+        }
+        return "Please enter a valid email address.";
+      },
+    },
+    {
+      type: 'input',
+      name: 'internSchool',
+      message: "What school did your intern go to?",
+      validate: (answer) => {
+        if (answer !== '') {
+          return true;
+        }
+        return "Please enter at least one character";
+      },
+    },
+  ])
+  // then statement to add all into array
+  .then((answers) => {
+    const intern = new Intern(
+      answers.internName,
+      answers.internId,
+      answers.internEmail,
+      answers.internSchool
+    );
+    teamMembers.push(intern);
+    idArray.push(answers.internId);
+    createTeam();
+  });
+}
+
+// Finally function to buildteam, then create directory if the path doesn't exist.
+
+function buildTeam() {
+  if (!fs.existsSync(DIST_DIR)) {
+    fs.mkdirSync(DIST_DIR);
+  }
+  fs.writeFileSync(distPath, render(teamMembers), 'utf-8');
+  }
+
+  // callback function to createmanager
+
+  createManager();
+}
+
+// callback function appMenu
+
+appMenu();
