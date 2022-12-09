@@ -16,7 +16,7 @@ Afterwards, user must install jest in the integrated terminal and type " npm ins
 Please follow the gif's provided to see step by step usage.
 
     
-    ![Gif of usage of app](./assets/images/usage-test.gif)
+![Gif of usage of app](./assets/images/usage-test.gif)
    
 
 -----------------------------------------------------------------------------------------
